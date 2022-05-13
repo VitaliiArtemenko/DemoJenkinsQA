@@ -36,6 +36,7 @@ public class TrialTests extends BaseTest {
     @Test
     public void testVitaliiArtemenkoFlukeOpenProductsPage() {
         openProductsPage();
+
         Assert.assertEquals(PRODUCTS_PAGE_TITLE, getDriver().getTitle());
         Assert.assertEquals(PRODUCTS_PAGE_HEADER, getDriver().findElement(By.xpath(HEADER_XPATH)).getText());
     }
@@ -43,6 +44,7 @@ public class TrialTests extends BaseTest {
     @Test
     public void testVitaliiArtemenkoFlukeOpenFeaturedPage() {
         openFeaturedPage();
+
         Assert.assertEquals(FEATURED_PAGE_TITLE, getDriver().getTitle());
         Assert.assertEquals(FEATURE_PAGE_HEADER, getDriver().findElement(By.xpath(HEADER_XPATH)).getText());
     }
@@ -50,6 +52,7 @@ public class TrialTests extends BaseTest {
     @Test
     public void testVitaliiArtemenkoFlukeOpenAwardsPage() {
         openAwardsPage();
+
         Assert.assertEquals(AWARDS_PAGE_TITLE, getDriver().getTitle());
         Assert.assertEquals(AWARDS_PAGE_HEADER, getDriver().findElement(By.xpath(AWARDS_HEADER_XPATH)).getText());
     }
