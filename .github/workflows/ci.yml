@@ -28,9 +28,6 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-maven-
 
-      - name: Wait for the Jenkins
-        run: ./.github/wait-for-jenkins.sh
-
       - name: Maven test
         id: test
         run: mvn test
