@@ -1,18 +1,28 @@
 package runner;
 
+import com.google.common.io.Files;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public final class BaseUtils {
-    private static final String CHROME_OPTIONS = "CHROME_OPTIONS";
-    private static final String CHROME_OPTIONS_PROP = "default." + CHROME_OPTIONS.toLowerCase();
+
+    private static final String ENV_CHROME_OPTIONS = "CHROME_OPTIONS";
+    private static final String ENV_APP_OPTIONS = "APP_OPTIONS";
+
+    static final String PREFIX_PROP = "default.";
+
+    private static final String PROP_CHROME_OPTIONS = PREFIX_PROP + ENV_CHROME_OPTIONS.toLowerCase();
 
     private static Properties properties;
 
@@ -20,7 +30,12 @@ public final class BaseUtils {
         if (properties == null) {
             properties = new Properties();
             if (isServerRun()) {
-                properties.setProperty(CHROME_OPTIONS_PROP, System.getenv(CHROME_OPTIONS));
+                properties.setProperty(PROP_CHROME_OPTIONS, System.getenv(ENV_CHROME_OPTIONS));
+
+                for (String option : System.getenv(ENV_APP_OPTIONS).split(";")) {
+                    String[] optionArr = option.split("=");
+                    properties.setProperty(PREFIX_PROP + optionArr[0], optionArr[1]);
+                }
             } else {
                 try {
                     InputStream inputStream = BaseUtils.class.getClassLoader().getResourceAsStream("local.properties");
@@ -41,7 +56,7 @@ public final class BaseUtils {
         initProperties();
 
         chromeOptions = new ChromeOptions();
-        String options = properties.getProperty(CHROME_OPTIONS_PROP);
+        String options = properties.getProperty(PROP_CHROME_OPTIONS);
         if (options != null) {
             for (String argument : options.split(";")) {
                 chromeOptions.addArguments(argument);
@@ -49,6 +64,10 @@ public final class BaseUtils {
         }
 
         WebDriverManager.chromedriver().setup();
+    }
+
+    static Properties getProperties() {
+        return properties;
     }
 
     static boolean isServerRun() {
@@ -61,4 +80,15 @@ public final class BaseUtils {
 
         return driver;
     }
+
+    static void captureScreenFile(WebDriver driver, String methodName, String className) {
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        File file = ts.getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(file, new File(String.format("ScreenshotsFailure/%s-%s.png", className, methodName)));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
