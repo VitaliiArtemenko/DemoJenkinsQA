@@ -55,5 +55,4 @@ public class Baha extends BaseTest {
         Assert.assertEquals(getDriver().findElement(By.xpath(unsafeErrorMessage)).getText(),
                 "‘!’ is an unsafe character");
     }
-
 }
