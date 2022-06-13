@@ -56,5 +56,3 @@ public class SmokeTest extends BaseTest {
                 "‘!’ is an unsafe character");
     }
 }
-
-
