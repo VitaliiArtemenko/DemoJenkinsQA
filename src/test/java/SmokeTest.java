@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import runner.BaseTest;
 
-public class Baha extends BaseTest {
+public class SmokeTest extends BaseTest {
 
     private static String itemName1 = "freestyle-project-()+-_~-1";
     static String itemName2 = "freestyle-project-2!";
