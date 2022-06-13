@@ -31,10 +31,10 @@ jobs:
       - name: Prepare Jenkins data
         run: |
           ls -l /home/runner/work/DemoJenkinsQA
-          ls -l /home/runner/work/DemoJenkinsQA/JenkinsQA_04
-          ls -l /home/runner/work/DemoJenkinsQA/JenkinsQA_04/jenkins_data
-          cat /home/runner/work/DemoJenkinsQA/JenkinsQA_04/jenkins_data/jenkins_backup0* > /home/runner/work/DemoJenkinsQA/JenkinsQA_04/jenkins_backup.tar
-          md5sum /home/runner/work/JenkinsQA_04/JenkinsQA_04/jenkins_backup.tar
+          ls -l /home/runner/work/DemoJenkinsQA/DemoJenkinsQA
+          ls -l /home/runner/work/DemoJenkinsQA/DemoJenkinsQA/jenkins_data
+          cat /home/runner/work/DemoJenkinsQA/DemoJenkinsQA/jenkins_data/jenkins_backup0* > /home/runner/work/DemoJenkinsQA/DemoJenkinsQA/jenkins_backup.tar
+          md5sum /home/runner/work/DemoJenkinsQA/DemoJenkinsQA/jenkins_backup.tar
 
       - name: Extract Jenkins data and set permission
         run: |
