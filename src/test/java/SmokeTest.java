@@ -6,7 +6,7 @@ import runner.BaseTest;
 
 public class SmokeTest extends BaseTest {
 
-    private static String itemName1 = "freestyle-project-()+-_~-1";
+    static String itemName1 = "freestyle-project-()+-_~-1";
     static String itemName2 = "freestyle-project-2!";
     static String newItemButton = "//div[@id='tasks']/div[1]/span/a/span[2]"; //xpath
     static String freestyleProjectButton =
