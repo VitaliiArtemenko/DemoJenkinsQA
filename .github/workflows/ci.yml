@@ -41,9 +41,6 @@ jobs:
           tar -xzvf ./jenkins_backup.tar
           chmod -R 777 ./jenkins_backup/var/jenkins_home
 
-      - name: Docker login
-        run: echo ${{ secrets.DOCKER_PAS }} | docker login --username ${{ secrets.DOCKER_USER }} --password-stdin
-
       - name: Docker start
         run: docker run --rm --detach -p 8080:8080 -p 50000:50000 -v /home/runner/work/JenkinsQA_04/JenkinsQA_04/jenkins_backup/var/jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk11
 
