@@ -25,3 +25,4 @@ public class SmokeTest extends BaseTest {
         Assert.assertEquals(actualBreadCrumb2.getText(),BREADCRUMB2);
     }
 }
+
